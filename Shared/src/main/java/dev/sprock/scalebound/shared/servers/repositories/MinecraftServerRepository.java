@@ -47,15 +47,27 @@ public class MinecraftServerRepository extends RepositoryBase
     }
 
     //(`server_id`, `server_address`, `server_name`, `max_ram_mb`, `used_ram_mb`, `creation_ts`, `updated_ts`, `server_port`, `server_tps`, `server_tps_1min`, `server_tps_5min`, `server_avg_ping`, `server_player_count`, `server_loaded_entities`, `server_max_player_count`, `server_loaded_chunks`, `server_errors`, `profile_id`) VALUES (NULL, NULL, ?, ?, NULL, ?, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, ?, NULL, NULL, ?)
-    public void addMinecraftServer(String serverName, long currentTimeMillis, ServerProfile profile)
+    public MinecraftServer addMinecraftServer(String serverName, long currentTimeMillis, ServerProfile profile)
     {
-        this.execute(MinecraftServerDatabase.MCSERVER_INSERT, (prepared) -> {
+        final long[] serverId = {0};
+        this.executeAndLastKey(MinecraftServerDatabase.MCSERVER_INSERT, (prepared) -> {
             prepared.setString(1, serverName);//server_name
             prepared.setInt(2, profile.getMaxRamMB());//max_ram_mb
             prepared.setLong(3, currentTimeMillis);//creation_ts
             prepared.setInt(4, profile.getMaxPlayerCount());//server_max_player_count
             prepared.setInt(5, profile.getProfileId()); //profile_id
+        }, (rs) -> {
+            if (rs.next()) {
+                serverId[0] = rs.getLong(1);
+            }
         });
+
+        final MinecraftServer minecraftServer = new MinecraftServer();
+        minecraftServer.setServerId((int) serverId[0]);
+        minecraftServer.setServerName(serverName);
+        minecraftServer.setCreationTS(System.currentTimeMillis());
+        minecraftServer.setProfileId(profile.getProfileId());
+        return minecraftServer;
     }
 
     public void setMinecraftServerSeen(int serverId, boolean seen)

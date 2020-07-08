@@ -2,6 +2,7 @@ package dev.scalebound.master;
 
 import dev.scalebound.master.console.ScaleboundConsole;
 import dev.scalebound.master.utils.Console;
+import dev.sprock.scalebound.shared.booter.BooterManager;
 import dev.sprock.scalebound.shared.commons.FileUtils;
 import dev.sprock.scalebound.shared.database.MySQLConfig;
 import dev.sprock.scalebound.shared.database.MySQLDatabase;
@@ -35,6 +36,8 @@ public class Scalebound implements Runnable
     private int ticks = 0;
     private boolean running = false;
     private long startUpdate = System.currentTimeMillis();
+    @Getter
+    private BooterManager booterManager;
 
 
     @Getter
@@ -68,6 +71,7 @@ public class Scalebound implements Runnable
         this.minecraftServerManager = new MinecraftServerManager();
         this.proxyServerManager = new ProxyServerManager();
         this.profileManager = new ProfileManager();
+        this.booterManager = new BooterManager();
 
         this.addressAssignHelper = new AddressAssignHelper();
 
@@ -183,11 +187,7 @@ public class Scalebound implements Runnable
                 for (int i = 0; i < requiredServers; i++) {
                     String serverName = this.getMinecraftServerManager().getFreeServerName(profile);
 //                    Console.log("Buffer", "Creating " + serverName);
-                    this.getMinecraftServerRepository().addMinecraftServer(serverName, System.currentTimeMillis(), profile);
-                    final MinecraftServer minecraftServer = new MinecraftServer();
-                    minecraftServer.setServerName(serverName);
-                    minecraftServer.setCreationTS(System.currentTimeMillis());
-                    minecraftServer.setProfileId(profile.getProfileId());
+                    final MinecraftServer minecraftServer = this.getMinecraftServerRepository().addMinecraftServer(serverName, System.currentTimeMillis(), profile);
                     this.getMinecraftServerManager().registerServer(minecraftServer);
                 }
 
@@ -200,8 +200,9 @@ public class Scalebound implements Runnable
         for (Map.Entry<String, MinecraftServer> serverEntry : this.getMinecraftServerManager().getServers())
         {
             final MinecraftServer minecraftServer = serverEntry.getValue();
-            if(minecraftServer.getAddress() == null)
+            if(minecraftServer.getAddress() == null || !minecraftServer.isSeen())
             {
+//                Console.log("Address Assign", minecraftServer.getAddress() + " " + minecraftServer.getServerName());
 //                Console.log("Address Assign", "Assigning address to " + minecraftServer.getServerName());
                 long start = System.currentTimeMillis();
                 final boolean addressAssigned = this.addressAssignHelper.assignAddress(minecraftServer, dedicatedServerManager, minecraftServerManager);
@@ -216,6 +217,18 @@ public class Scalebound implements Runnable
         }
 
 
+        //Start up servers
+        for (Map.Entry<String, MinecraftServer> serverEntry : this.getMinecraftServerManager().getServers())
+        {
+            final MinecraftServer minecraftServer = serverEntry.getValue();
+            if(!minecraftServer.isSeen())
+            {
+                Console.log(minecraftServer.getServerName(), "Starting on " + minecraftServer.getAddress() + "...");
+                this.minecraftServerRepository.setMinecraftServerSeen(minecraftServer.getServerId(), true);
+                minecraftServer.setSeen(true);
+                new Thread(() -> this.booterManager.startServer(minecraftServer, this.profileManager)).start();
+            }
+        }
     }
 
     @Override

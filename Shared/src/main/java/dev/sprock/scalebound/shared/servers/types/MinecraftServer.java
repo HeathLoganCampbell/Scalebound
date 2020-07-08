@@ -20,6 +20,7 @@ public class MinecraftServer extends ServerBase
     private int avgPing;
 
     private int playerCount;
+    private int maxPlayerCount;
     private int loadedEntities;
     private int loadedChunks;
     private int errors;
@@ -50,6 +51,7 @@ public class MinecraftServer extends ServerBase
         this.avgPing = resultSet.getInt("server_avg_ping");
 
         this.playerCount = resultSet.getInt("server_player_count");
+        this.maxPlayerCount = resultSet.getInt("server_max_player_count");
         this.loadedEntities = resultSet.getInt("server_loaded_entities");
         this.loadedChunks = resultSet.getInt("server_loaded_chunks");
         this.errors = resultSet.getInt("server_errors");

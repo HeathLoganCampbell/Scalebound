@@ -15,6 +15,7 @@ public class ProfileEditCommand extends SubCommand
 
         this.registerSubCommand(new ProfileEditDownloadsCommand(scalebound));
         this.registerSubCommand(new ProfileEditGeneratesCommand(scalebound));
+        this.registerSubCommand(new ProfileEditRawCommandCommand(scalebound));
     }
 
     @Override

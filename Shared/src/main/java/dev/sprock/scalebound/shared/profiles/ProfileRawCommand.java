@@ -7,9 +7,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProfileGenerateFile
+public class ProfileRawCommand
 {
-    private String fileName;
-    private String folder;
-    private String content;
+    private String command;
 }
