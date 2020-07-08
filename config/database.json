@@ -1,7 +1,0 @@
-{
-  "address": "localhost",
-  "port": "3306",
-  "database": "scalebound",
-  "username": "root",
-  "password": ""
-}
