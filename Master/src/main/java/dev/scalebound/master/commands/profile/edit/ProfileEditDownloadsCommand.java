@@ -2,8 +2,8 @@ package dev.scalebound.master.commands.profile.edit;
 
 import dev.scalebound.master.Scalebound;
 import dev.scalebound.master.console.command.SubCommand;
-import dev.sprock.scalebound.shared.profiles.ProfileDownloadLog;
-import dev.sprock.scalebound.shared.profiles.ServerProfile;
+import dev.scalebound.shared.profiles.ProfileDownloadLog;
+import dev.scalebound.shared.profiles.ServerProfile;
 
 public class ProfileEditDownloadsCommand extends SubCommand
 {

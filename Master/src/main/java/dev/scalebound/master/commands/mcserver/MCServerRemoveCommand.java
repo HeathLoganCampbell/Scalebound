@@ -2,7 +2,7 @@ package dev.scalebound.master.commands.mcserver;
 
 import dev.scalebound.master.Scalebound;
 import dev.scalebound.master.console.command.SubCommand;
-import dev.sprock.scalebound.shared.servers.types.MinecraftServer;
+import dev.scalebound.shared.servers.types.MinecraftServer;
 
 // /MCServer view
 public class MCServerRemoveCommand extends SubCommand

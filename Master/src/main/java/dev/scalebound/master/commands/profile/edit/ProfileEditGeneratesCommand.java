@@ -2,8 +2,8 @@ package dev.scalebound.master.commands.profile.edit;
 
 import dev.scalebound.master.Scalebound;
 import dev.scalebound.master.console.command.SubCommand;
-import dev.sprock.scalebound.shared.profiles.ProfileGenerateFile;
-import dev.sprock.scalebound.shared.profiles.ServerProfile;
+import dev.scalebound.shared.profiles.ProfileGenerateFile;
+import dev.scalebound.shared.profiles.ServerProfile;
 
 // /Profile edit generate <ProfileName> <Folder (. = null)> <FileName> <content...>
 // /prof e gen HUB config/ database.json { "username": "cookie", "Password": "Hello" }

@@ -2,7 +2,7 @@ package dev.scalebound.master.commands.dedi;
 
 import dev.scalebound.master.Scalebound;
 import dev.scalebound.master.console.command.SubCommand;
-import dev.sprock.scalebound.shared.servers.types.DedicatedServer;
+import dev.scalebound.shared.servers.types.DedicatedServer;
 
 import java.util.Map;
 

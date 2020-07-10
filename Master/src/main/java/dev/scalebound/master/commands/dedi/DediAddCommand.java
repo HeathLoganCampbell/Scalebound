@@ -2,7 +2,7 @@ package dev.scalebound.master.commands.dedi;
 
 import dev.scalebound.master.Scalebound;
 import dev.scalebound.master.console.command.SubCommand;
-import dev.sprock.scalebound.shared.commons.InputUtils;
+import dev.scalebound.shared.commons.InputUtils;
 
 //  add <Name> <IpAddress> <MaxRamMB>
 public class DediAddCommand extends SubCommand

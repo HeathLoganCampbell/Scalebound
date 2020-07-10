@@ -2,8 +2,8 @@ package dev.scalebound.master.commands.mcserver;
 
 import dev.scalebound.master.Scalebound;
 import dev.scalebound.master.console.command.SubCommand;
-import dev.sprock.scalebound.shared.commons.InputUtils;
-import dev.sprock.scalebound.shared.profiles.ServerProfile;
+import dev.scalebound.shared.commons.InputUtils;
+import dev.scalebound.shared.profiles.ServerProfile;
 
 import java.util.Map;
 

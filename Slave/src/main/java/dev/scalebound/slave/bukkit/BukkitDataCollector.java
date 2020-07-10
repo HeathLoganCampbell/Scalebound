@@ -5,26 +5,29 @@ import net.minecraft.server.v1_8_R3.MinecraftServer;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 
-public class BukkitDataCollector extends DataCollector {
+public class BukkitDataCollector extends DataCollector
+{
+    public static final int MB = 1024 * 1024;
+
     @Override
     public int getTPS() {
-        return (int) MinecraftServer.getServer().recentTps[0];
+        return 0;
     }
 
 
     @Override
     public int getTPS1MIN() {
-        return (int) MinecraftServer.getServer().recentTps[0];
+        return 0;
     }
 
     @Override
     public int getTPS5MIN() {
-        return (int) MinecraftServer.getServer().recentTps[1];
+        return 0;
     }
 
     @Override
     public int getTPS15MIN() {
-        return (int) MinecraftServer.getServer().recentTps[2];
+        return 0;
     }
 
     @Override
@@ -50,5 +53,11 @@ public class BukkitDataCollector extends DataCollector {
             entitiesCount += world.getEntities().size();
         }
         return entitiesCount;
+    }
+
+    @Override
+    public int getUsageRamMB() {
+        Runtime instance = Runtime.getRuntime();
+        return (int) ((instance.totalMemory() - instance.freeMemory()) / MB);
     }
 }

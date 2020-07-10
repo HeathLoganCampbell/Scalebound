@@ -1,13 +1,10 @@
 package dev.scalebound.slave.common;
 
-import dev.sprock.scalebound.shared.commons.FileUtils;
-import dev.sprock.scalebound.shared.database.MySQLConfig;
-import dev.sprock.scalebound.shared.database.MySQLDatabase;
-import dev.sprock.scalebound.shared.servers.repositories.MinecraftServerRepository;
-import net.minecraft.server.v1_8_R3.MinecraftServer;
-import org.bukkit.Bukkit;
+import dev.scalebound.shared.commons.FileUtils;
+import dev.scalebound.shared.database.MySQLConfig;
+import dev.scalebound.shared.database.MySQLDatabase;
+import dev.scalebound.shared.servers.repositories.MinecraftServerRepository;
 
-import java.io.Console;
 import java.io.File;
 
 public class Monitor implements Runnable

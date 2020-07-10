@@ -2,8 +2,8 @@ package dev.scalebound.master.commands.mcserver;
 
 import dev.scalebound.master.Scalebound;
 import dev.scalebound.master.console.command.SubCommand;
-import dev.sprock.scalebound.shared.profiles.ServerProfile;
-import dev.sprock.scalebound.shared.servers.types.MinecraftServer;
+import dev.scalebound.shared.profiles.ServerProfile;
+import dev.scalebound.shared.servers.types.MinecraftServer;
 
 import java.util.Map;
 

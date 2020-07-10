@@ -24,7 +24,6 @@
             <groupId>dev.sprock.scalebound</groupId>
             <artifactId>Shared</artifactId>
             <version>1.0-SNAPSHOT</version>
-            <scope>compile</scope>
         </dependency>
 
         <dependency>
@@ -34,6 +33,7 @@
             <scope>provided</scope>
         </dependency>
 
+
         <dependency>
             <groupId>com.velocitypowered</groupId>
             <artifactId>velocity-api</artifactId>
@@ -41,5 +41,6 @@
             <scope>provided</scope>
         </dependency>
     </dependencies>
+
 
 </project>

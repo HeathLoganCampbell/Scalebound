@@ -2,8 +2,7 @@ package dev.scalebound.master.commands;
 
 import dev.scalebound.master.Scalebound;
 import dev.scalebound.master.console.command.Command;
-import dev.scalebound.master.console.command.CommandMap;
-import dev.sprock.scalebound.shared.servers.types.MinecraftServer;
+import dev.scalebound.shared.servers.types.MinecraftServer;
 
 import java.util.Map;
 
