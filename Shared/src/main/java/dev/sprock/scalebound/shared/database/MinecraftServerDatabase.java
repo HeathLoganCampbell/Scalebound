@@ -11,4 +11,5 @@ public class MinecraftServerDatabase
 
     public static final String MCSERVER_UPDATE_ADDRESS_PORT = "UPDATE `minecraftservers` SET `server_address` = ?, server_port = ? WHERE `minecraftservers`.`server_id` = ?;";
     public static final String MCSERVER_UPDATE_SEEN = "UPDATE `minecraftservers` SET `seen` = ? WHERE `minecraftservers`.`server_id` = ?;";
+    public static final String MCSERVER_STATISTICS = "UPDATE `minecraftservers` SET `used_ram_mb` = ?, `server_tps` = ?, `server_tps_1min` = ?, `server_tps_5min` = ?, `server_avg_ping` = ?, `server_player_count` = ?, `server_loaded_entities` = ?, `server_loaded_chunks` = ?, `updated_ts` = ?  WHERE `minecraftservers`.`server_id` = ?;";
 }

@@ -35,6 +35,22 @@ public class MinecraftServerRepository extends RepositoryBase
         });
     }
 
+    public void updateStatistics(int serverId, int ramMBUsage, int tps, int tps1min, int tps5min, int avgPing, int playerCount, int loadedEntities, int chunkCount)
+    {
+        this.execute(MinecraftServerDatabase.MCSERVER_STATISTICS, (prepared) -> {
+            prepared.setInt(1, ramMBUsage);
+            prepared.setInt(2, tps);
+            prepared.setInt(3, tps1min);
+            prepared.setInt(4, tps5min);
+            prepared.setInt(5, avgPing);
+            prepared.setInt(6, playerCount);
+            prepared.setInt(7, loadedEntities);
+            prepared.setInt(8, chunkCount);
+            prepared.setLong(9, System.currentTimeMillis());
+            prepared.setInt(10, serverId);//server id
+        });
+    }
+
     public void addMinecraftServer(String serverName, int maxRamMB, int maxPlayerCount, long currentTimeMillis, ServerProfile profile)
     {
         this.execute(MinecraftServerDatabase.MCSERVER_INSERT, (prepared) -> {

@@ -1,0 +1,4 @@
+name: ScaleboundSlave
+version: 1.0
+authors: [Sprock, SprockPls]
+main: dev.scalebound.slave.bukkit.BukkitSlavePlugin

@@ -35,7 +35,6 @@ public class BooterManager
                 .replace("%SERVER_PROFILE_NAME%", profile.getName())
                 .replace("%SERVER_MAX_RAM_MB%", minecraftServer.getMaxRamMB() + "")
                 .replace("%SERVER_MAX_PLAYER_COUNT%", minecraftServer.getMaxPlayerCount() + "");
-
     }
 
     public void startServer(MinecraftServer minecraftServer, ProfileManager profileManager) {
