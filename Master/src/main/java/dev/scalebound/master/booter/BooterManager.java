@@ -1,4 +1,4 @@
-package dev.scalebound.shared.booter;
+package dev.scalebound.master.booter;
 
 import com.jcraft.jsch.*;
 import dev.scalebound.shared.profiles.ProfileContent;

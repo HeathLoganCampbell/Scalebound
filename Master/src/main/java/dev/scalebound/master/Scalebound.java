@@ -2,7 +2,7 @@ package dev.scalebound.master;
 
 import dev.scalebound.master.console.ScaleboundConsole;
 import dev.scalebound.master.utils.Console;
-import dev.scalebound.shared.booter.BooterManager;
+import dev.scalebound.master.booter.BooterManager;
 import dev.scalebound.shared.commons.FileUtils;
 import dev.scalebound.shared.database.MySQLConfig;
 import dev.scalebound.shared.database.MySQLDatabase;
@@ -170,7 +170,7 @@ public class Scalebound implements Runnable
             for (MinecraftServer minecraftServer : serverByProfile)
             {
 
-                if(/** minecraftServer.isOnline() &&**/
+                if(minecraftServer.isOnline() &&
                         minecraftServer.getPlayerCount() <= bufferMaxPlayerCount)
                     activeBufferServers++;
             }
@@ -191,7 +191,6 @@ public class Scalebound implements Runnable
             }
         }
 
-
         //Assign ips to servers
         for (Map.Entry<String, MinecraftServer> serverEntry : this.getMinecraftServerManager().getServers())
         {
@@ -211,7 +210,6 @@ public class Scalebound implements Runnable
                     Console.log("Address Assign", "!! Not enough dedicated servers to assign more servers !! to add " + minecraftServer.getServerName());
             }
         }
-
 
         //Start up servers
         for (Map.Entry<String, MinecraftServer> serverEntry : this.getMinecraftServerManager().getServers())

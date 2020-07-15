@@ -1,4 +1,4 @@
-package dev.scalebound.shared.booter;
+package dev.scalebound.master.booter;
 
 public class StartUpScriptBuilder
 {
