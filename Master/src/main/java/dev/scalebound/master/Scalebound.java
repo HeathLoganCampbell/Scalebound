@@ -1,6 +1,6 @@
 package dev.scalebound.master;
 
-import dev.scalebound.master.config.MasterConfig;
+import dev.scalebound.master.settings.MasterConfig;
 import dev.scalebound.master.console.ScaleboundConsole;
 import dev.scalebound.master.utils.Console;
 import dev.scalebound.master.booter.BooterManager;

@@ -1,13 +1,12 @@
 package dev.scalebound.master.booter;
 
 import com.jcraft.jsch.*;
-import dev.scalebound.master.config.MasterConfig;
+import dev.scalebound.master.settings.MasterConfig;
 import dev.scalebound.shared.profiles.ProfileContent;
 import dev.scalebound.shared.profiles.ServerProfile;
 import dev.scalebound.shared.servers.managers.ProfileManager;
 import dev.scalebound.shared.servers.types.MinecraftServer;
 
-import java.io.File;
 import java.io.InputStream;
 
 /**
