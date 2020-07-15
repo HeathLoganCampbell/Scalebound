@@ -19,3 +19,5 @@ to player count.
 ### Graphs and monitoring
 We have a few in build tooling to track 
 tps, avg ping, ram usage, cpu usage and player count
+
+### Powered by a MYSQL server
