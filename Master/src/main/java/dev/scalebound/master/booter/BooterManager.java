@@ -1,6 +1,7 @@
 package dev.scalebound.master.booter;
 
 import com.jcraft.jsch.*;
+import dev.scalebound.master.config.MasterConfig;
 import dev.scalebound.shared.profiles.ProfileContent;
 import dev.scalebound.shared.profiles.ProfileRawCommand;
 import dev.scalebound.shared.profiles.ServerProfile;
@@ -17,10 +18,11 @@ import java.io.InputStream;
  */
 public class BooterManager
 {
-    public static final String SSH_USERNAME = "scalebound";
+    private MasterConfig settings;
 
-    public BooterManager()
+    public BooterManager(MasterConfig settings)
     {
+        this.settings = settings;
     }
 
     private String injectPlaceholders(String command, MinecraftServer minecraftServer, ServerProfile profile)
@@ -44,13 +46,12 @@ public class BooterManager
             script.addLine(injectPlaceholders(rawCommand.getCommand(), minecraftServer, profile));
         }
 
-        executeCommand("ubuntu", minecraftServer.getAddress(), script.toString());
+        executeCommand(settings.getSSHUsername(), minecraftServer.getAddress(), script.toString());
     }
 
     public void stopServer(MinecraftServer minecraftServer)
     {
-
-        executeCommand("ubuntu", minecraftServer.getAddress(), "for session in $(screen -ls | grep -o '[0-9]*\\." + minecraftServer.getServerName() + "'); do screen -S \"${session}\" -X quit; done");
+        executeCommand(settings.getSSHUsername(), minecraftServer.getAddress(), "for session in $(screen -ls | grep -o '[0-9]*\\." + minecraftServer.getServerName() + "'); do screen -S \"${session}\" -X quit; done");
     }
 
     private void executeCommand(String user, String host, String command)
@@ -60,7 +61,7 @@ public class BooterManager
             java.util.Properties config = new java.util.Properties();
             config.put("StrictHostKeyChecking", "no");
             JSch jsch = new JSch();
-            File privateKeyFile = new File("C:\\Users\\GGPC\\.ssh\\DreamTestNetwork\\rsa");
+            File privateKeyFile = new File(settings.getPrivateKeyFile());
 
             jsch.addIdentity(privateKeyFile.getAbsolutePath());
             Session session=jsch.getSession(user, host, 22);
@@ -102,5 +103,7 @@ public class BooterManager
             e.printStackTrace();
         }
     }
+
+
     //for session in $(screen -ls | grep -o \'[0-9]*\\.%SERVER_NAME%\'); do screen -S \"${session}\" -X quit; done\n
 }

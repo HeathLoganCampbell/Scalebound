@@ -1,5 +1,6 @@
 package dev.scalebound.master;
 
+import dev.scalebound.master.config.MasterConfig;
 import dev.scalebound.master.console.ScaleboundConsole;
 import dev.scalebound.master.utils.Console;
 import dev.scalebound.master.booter.BooterManager;
@@ -47,6 +48,8 @@ public class Scalebound implements Runnable
 
     private MySQLDatabase mySQLDatabase;
 
+    private MasterConfig settings;
+
     @Getter
     private DedicatedServerRepository dedicatedServerRepository;
     @Getter
@@ -58,6 +61,7 @@ public class Scalebound implements Runnable
 
 
     private File databaseConfig = new File("./config/database.json");
+    private File settingsConfigFile = new File("./config/settings.json");
 
     private ScaleboundConsole console;
 
@@ -77,6 +81,14 @@ public class Scalebound implements Runnable
     private void init()
     {
         this.running = true;
+        if(!settingsConfigFile.exists())
+        {
+            Console.log("Config", "Creating config.json...");
+            while (!settingsConfigFile.getParentFile().exists())
+                settingsConfigFile.getParentFile().mkdirs();
+            FileUtils.toFile(new MasterConfig(), settingsConfigFile);
+        }
+        this.settings = FileUtils.toObject(settingsConfigFile, MasterConfig.class);
 
         if(!databaseConfig.exists())
         {
