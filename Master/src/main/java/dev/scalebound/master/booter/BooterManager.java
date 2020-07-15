@@ -19,10 +19,8 @@ public class BooterManager
 {
     public static final String SSH_USERNAME = "scalebound";
 
-    private JSch ssh;
     public BooterManager()
     {
-        this.ssh = new JSch();
     }
 
     private String injectPlaceholders(String command, MinecraftServer minecraftServer, ServerProfile profile)
