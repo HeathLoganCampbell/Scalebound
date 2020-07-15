@@ -2,7 +2,6 @@ package dev.scalebound.master.commands.profile.edit;
 
 import dev.scalebound.master.Scalebound;
 import dev.scalebound.master.console.command.SubCommand;
-import dev.scalebound.shared.profiles.ProfileRawCommand;
 import dev.scalebound.shared.profiles.ServerProfile;
 
 // /Profile edit generate <ProfileName> <Folder (. = null)> <FileName> <content...>
@@ -43,8 +42,7 @@ public class ProfileEditRawCommandCommand extends SubCommand
             return;
         }
 
-        final ProfileRawCommand rawCommand = new ProfileRawCommand(contentStr.toString());
-        profile.getContent().getRawCommands().add(rawCommand);
+        profile.getContent().getRawCommands().add(contentStr.toString());
         this.scalebound.getProfileRepository().updateProfileContent(profile);
 
         log("Updated Profile " + profileName);

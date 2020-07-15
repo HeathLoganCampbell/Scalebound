@@ -13,7 +13,7 @@ public class ProfileContent
 {
     private List<ProfileDownloadLog> downloads;
     private List<ProfileGenerateFile> generateFiles;
-    private List<ProfileRawCommand> rawCommands;
+    private List<String> rawCommands;
 
     public ProfileContent()
     {

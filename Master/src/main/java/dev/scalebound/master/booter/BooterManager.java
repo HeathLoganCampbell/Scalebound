@@ -3,7 +3,6 @@ package dev.scalebound.master.booter;
 import com.jcraft.jsch.*;
 import dev.scalebound.master.config.MasterConfig;
 import dev.scalebound.shared.profiles.ProfileContent;
-import dev.scalebound.shared.profiles.ProfileRawCommand;
 import dev.scalebound.shared.profiles.ServerProfile;
 import dev.scalebound.shared.servers.managers.ProfileManager;
 import dev.scalebound.shared.servers.types.MinecraftServer;
@@ -29,6 +28,7 @@ public class BooterManager
     {
         return command
                 .replace("%SERVER_NAME%", minecraftServer.getServerName())
+                .replace("%SERVER_ID%", minecraftServer.getServerId() + "")
                 .replace("%SERVER_ADDRESS%", minecraftServer.getAddress())
                 .replace("%SERVER_PORT%", minecraftServer.getPort() + "")
                 .replace("%SERVER_PROFILE_ID%", minecraftServer.getProfileId() + "")
@@ -42,8 +42,8 @@ public class BooterManager
 
         final ProfileContent content = profile.getContent();
         StartUpScriptBuilder script = new StartUpScriptBuilder();
-        for (ProfileRawCommand rawCommand : content.getRawCommands()) {
-            script.addLine(injectPlaceholders(rawCommand.getCommand(), minecraftServer, profile));
+        for (String rawCommand : content.getRawCommands()) {
+            script.addLine(injectPlaceholders(rawCommand, minecraftServer, profile));
         }
 
         executeCommand(settings.getSSHUsername(), minecraftServer.getAddress(), script.toString());
@@ -61,10 +61,15 @@ public class BooterManager
             java.util.Properties config = new java.util.Properties();
             config.put("StrictHostKeyChecking", "no");
             JSch jsch = new JSch();
-            File privateKeyFile = new File(settings.getPrivateKeyFile());
 
-            jsch.addIdentity(privateKeyFile.getAbsolutePath());
-            Session session=jsch.getSession(user, host, 22);
+            if(!settings.getPrivateKeyFile().isEmpty())
+            {
+                jsch.addIdentity(settings.getPrivateKeyFile());
+            }
+
+            Session session = jsch.getSession(user, host, 22);
+            if(settings.getPrivateKeyFile().isEmpty())
+                session.setPassword(settings.getSSHPassword());
             session.setConfig(config);
             session.connect();
 
@@ -78,9 +83,9 @@ public class BooterManager
             byte[] tmp= new byte[1024];
             while(true)
             {
-                while(in.available()>0)
+                while(in.available() > 0)
                 {
-                    int i=in.read(tmp, 0, 1024);
+                    int i = in.read(tmp, 0, 1024);
                     if(i<0)break;
                     System.out.print(new String(tmp, 0, i));
                 }
@@ -105,5 +110,5 @@ public class BooterManager
     }
 
 
-    //for session in $(screen -ls | grep -o \'[0-9]*\\.%SERVER_NAME%\'); do screen -S \"${session}\" -X quit; done\n
+    //for session in $(screen -ls | grep -o '[0-9]*.TEST-[0-9]*'); do screen -S "${session}" -X quit; done
 }

@@ -32,6 +32,11 @@ public class MinecraftServer extends ServerBase
         return System.currentTimeMillis() - this.getLastUpdatedTS() < 15_000L;
     }
 
+    public boolean isBooting()
+    {
+        return System.currentTimeMillis() - this.getCreationTS() < 120_000L;
+    }
+
     public boolean isProxy()
     {
         return this.getServerName().startsWith("PROXY-");

@@ -188,7 +188,8 @@ public class Scalebound implements Runnable
             for (MinecraftServer minecraftServer : serverByProfile)
             {
 
-                if(minecraftServer.isOnline() &&
+                if((minecraftServer.isOnline() ||
+                        minecraftServer.isBooting()) &&
                         minecraftServer.getPlayerCount() <= bufferMaxPlayerCount)
                     activeBufferServers++;
             }
