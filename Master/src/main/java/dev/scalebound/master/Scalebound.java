@@ -67,28 +67,34 @@ public class Scalebound implements Runnable
 
     public Scalebound()
     {
+        this.loadSettings();
+
         this.dedicatedServerManager = new DedicatedServerManager();
         this.minecraftServerManager = new MinecraftServerManager();
         this.proxyServerManager = new ProxyServerManager();
         this.profileManager = new ProfileManager();
-        this.booterManager = new BooterManager();
+        this.booterManager = new BooterManager(this.settings);
 
         this.addressAssignHelper = new AddressAssignHelper();
 
         this.run();
     }
 
-    private void init()
+    private void loadSettings()
     {
-        this.running = true;
         if(!settingsConfigFile.exists())
         {
-            Console.log("Config", "Creating config.json...");
+            Console.log("Config", "Creating settings.json...");
             while (!settingsConfigFile.getParentFile().exists())
                 settingsConfigFile.getParentFile().mkdirs();
             FileUtils.toFile(new MasterConfig(), settingsConfigFile);
         }
         this.settings = FileUtils.toObject(settingsConfigFile, MasterConfig.class);
+    }
+
+    private void init()
+    {
+        this.running = true;
 
         if(!databaseConfig.exists())
         {
