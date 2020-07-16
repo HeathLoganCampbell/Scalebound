@@ -43,7 +43,7 @@ public class VelocitySlavePlugin
     public void onProxyInitialization(ProxyInitializeEvent event)
     {
         this.server.getScheduler().buildTask(this, () -> this.monitor.run()).repeat(5, TimeUnit.SECONDS);
-        this.server.getScheduler().buildTask(this, () -> serverManager.run()).repeat(5, TimeUnit.SECONDS);
+        this.server.getScheduler().buildTask(this, () -> this.serverManager.run()).repeat(5, TimeUnit.SECONDS);
 
         this.server.getEventManager().register(this, new HubBalanceListener(this));
     }
@@ -51,7 +51,7 @@ public class VelocitySlavePlugin
     public RegisteredServer getBestServer(String profileName)
     {
         List<MinecraftServer> servers = this.serverManager.getProfiledServers(profileName);
-        
+
         MinecraftServer minecraftServer = servers.get(RANDOM.nextInt(servers.size()));
         Optional<RegisteredServer> server = this.server.getServer(minecraftServer.getServerName());
 

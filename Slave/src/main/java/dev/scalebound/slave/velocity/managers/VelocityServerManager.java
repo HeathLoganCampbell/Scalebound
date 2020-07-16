@@ -1,7 +1,6 @@
 package dev.scalebound.slave.velocity.managers;
 
 import com.velocitypowered.api.proxy.ProxyServer;
-import com.velocitypowered.api.proxy.server.RegisteredServer;
 import com.velocitypowered.api.proxy.server.ServerInfo;
 import dev.scalebound.shared.profiles.ServerProfile;
 import dev.scalebound.shared.servers.repositories.ProfileRepository;
@@ -49,6 +48,7 @@ public class VelocityServerManager implements Runnable
     @Override
     public void run()
     {
+        System.out.println("Run == == ==");
         if(tickProfile++ == 20 || this.profiledServers.isEmpty())
         {
             this.profiledServers.clear();
