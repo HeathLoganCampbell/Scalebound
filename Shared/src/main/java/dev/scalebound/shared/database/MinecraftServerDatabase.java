@@ -9,7 +9,7 @@ public class MinecraftServerDatabase
     public static final String MCSERVER_DELETE_SERVER_ID = "DELETE FROM `MinecraftServers` WHERE `MinecraftServers`.`server_id` = ?";
     public static final String MCSERVER_DELETE_SERVER_NAME = "DELETE FROM `MinecraftServers` WHERE `MinecraftServers`.`server_name` = ?";
 
-    public static final String MCSERVER_UPDATE_ADDRESS_PORT = "UPDATE `MinecraftServers` SET `server_address` = ?, server_port = ? WHERE `minecraftservers`.`server_id` = ?;";
+    public static final String MCSERVER_UPDATE_ADDRESS_PORT = "UPDATE `MinecraftServers` SET `server_address` = ?, server_port = ? WHERE `MinecraftServers`.`server_id` = ?;";
     public static final String MCSERVER_UPDATE_SEEN = "UPDATE `MinecraftServers` SET `seen` = ? WHERE `MinecraftServers`.`server_id` = ?;";
     public static final String MCSERVER_STATISTICS = "UPDATE `MinecraftServers` SET `used_ram_mb` = ?, `server_tps` = ?, `server_tps_1min` = ?, `server_tps_5min` = ?, `server_avg_ping` = ?, `server_player_count` = ?, `server_loaded_entities` = ?, `server_loaded_chunks` = ?, `updated_ts` = ?  WHERE `MinecraftServers`.`server_id` = ?;";
 }
