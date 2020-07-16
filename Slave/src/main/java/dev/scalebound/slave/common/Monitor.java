@@ -40,6 +40,9 @@ public class Monitor implements Runnable
 
         final MySQLConfig mySQLConfig = FileUtils.toObject(databaseConfigFile, MySQLConfig.class);
         this.serverConfig = FileUtils.toObject(serverConfigFile, ServerConfig.class);
+        for (int i = 0; i < 10; i++) {
+            System.out.println(mySQLConfig.username + " " + mySQLConfig.address);
+        }
         this.mySQLDatabase = new MySQLDatabase(mySQLConfig);
 
         this.minecraftServerRepository = new MinecraftServerRepository(this.mySQLDatabase);
