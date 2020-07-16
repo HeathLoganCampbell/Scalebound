@@ -42,6 +42,7 @@ public class VelocitySlavePlugin
     @Subscribe
     public void onProxyInitialization(ProxyInitializeEvent event)
     {
+        System.out.println("ProxyInitializeEvent");
         this.server.getScheduler().buildTask(this, () -> this.monitor.run()).repeat(5, TimeUnit.SECONDS).schedule();
         this.server.getScheduler().buildTask(this, () -> this.serverManager.run()).repeat(5, TimeUnit.SECONDS).schedule();
 
