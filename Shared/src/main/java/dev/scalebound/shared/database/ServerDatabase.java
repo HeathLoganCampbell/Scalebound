@@ -10,9 +10,9 @@ public class ServerDatabase
     public static final String DEDI_FETCH_ALL = "SELECT * FROM `DedicatedServers`";
 
 
-    public static final String DEDI_INSERT = "INSERT INTO `dedicatedservers` (`server_id`, `server_address`, `server_name`, `max_ram_mb`, `used_ram_mb`, `creation_ts`, `updated_ts`) VALUES (NULL, ?, ?, ?, NULL, ?, NULL);";
+    public static final String DEDI_INSERT = "INSERT INTO `DedicatedServers` (`server_id`, `server_address`, `server_name`, `max_ram_mb`, `used_ram_mb`, `creation_ts`, `updated_ts`) VALUES (NULL, ?, ?, ?, NULL, ?, NULL);";
 
 
-    public static final String DEDI_DELETE_SERVER_ID = "DELETE FROM `dedicatedservers` WHERE `dedicatedservers`.`server_id` = ?";
-    public static final String DEDI_DELETE_SERVER_NAME = "DELETE FROM `dedicatedservers` WHERE `dedicatedservers`.`server_name` = ?";
+    public static final String DEDI_DELETE_SERVER_ID = "DELETE FROM `DedicatedServers` WHERE `dedicatedservers`.`server_id` = ?";
+    public static final String DEDI_DELETE_SERVER_NAME = "DELETE FROM `DedicatedServers` WHERE `dedicatedservers`.`server_name` = ?";
 }

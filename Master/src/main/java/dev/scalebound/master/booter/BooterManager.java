@@ -110,4 +110,7 @@ public class BooterManager
 
 
     //for session in $(screen -ls | grep -o '[0-9]*.TEST-[0-9]*'); do screen -S "${session}" -X quit; done
+    //for session in $(screen -ls | grep -o '[0-9]*.%SERVER_NAME%'); do screen -S "${session}" -X quit; done
+
+    //"for session in $(screen -ls | grep -o '[0-9]*\.%SERVER_NAME%'); do screen -S \"${session}\" -X quit; done"
 }
