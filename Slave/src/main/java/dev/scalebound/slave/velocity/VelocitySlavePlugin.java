@@ -51,6 +51,7 @@ public class VelocitySlavePlugin
     public RegisteredServer getBestServer(String profileName)
     {
         List<MinecraftServer> servers = this.serverManager.getProfiledServers(profileName);
+        
         MinecraftServer minecraftServer = servers.get(RANDOM.nextInt(servers.size()));
         Optional<RegisteredServer> server = this.server.getServer(minecraftServer.getServerName());
 

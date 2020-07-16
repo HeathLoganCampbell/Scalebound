@@ -33,7 +33,11 @@ public class VelocityServerManager implements Runnable
     public List<MinecraftServer> getProfiledServers(String profile)
     {
         Integer profileId = profileToId.get(profile);
-        if(profileId == null) return null;
+        if(profileId == null) {
+            System.out.println("profile null");
+            return null;
+        }
+        System.out.println("profile Id = " + profileId);
         return this.profiledServers.get(profileId.intValue());
     }
 
