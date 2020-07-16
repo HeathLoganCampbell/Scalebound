@@ -22,15 +22,19 @@ public class HubBalanceListener
     @Subscribe
     public void onConnect(ServerPreConnectEvent e)
     {
+        System.out.println("Connecting........");
         Player player = e.getPlayer();
         if(!connected.contains(player.getUniqueId()))
         {
+            System.out.println("Finding server........");
             RegisteredServer bestServer = plugin.getBestServer("TEST");
+            System.out.println("Found server........");
             if(bestServer == null)
             {
                 e.setResult(ServerPreConnectEvent.ServerResult.denied());
                 return;
             }
+            System.out.println("Connecting........");
             e.setResult(ServerPreConnectEvent.ServerResult.allowed(bestServer));
             connected.add(player.getUniqueId());
         }
