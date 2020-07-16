@@ -4,6 +4,7 @@ import dev.scalebound.shared.commons.FileUtils;
 import dev.scalebound.shared.database.MySQLConfig;
 import dev.scalebound.shared.database.MySQLDatabase;
 import dev.scalebound.shared.servers.repositories.MinecraftServerRepository;
+import lombok.Getter;
 
 import java.io.File;
 
@@ -12,12 +13,14 @@ public class Monitor implements Runnable
 
     private File databaseConfigFile = new File("./config/database.json");
     private File serverConfigFile = new File("./config/server.json");
+    @Getter
     private MySQLDatabase mySQLDatabase;
 
     private ServerConfig serverConfig;
 
 
     private DataCollector dataCollector;
+    @Getter
     private final MinecraftServerRepository minecraftServerRepository;
 
     public Monitor(DataCollector dataCollector)
@@ -40,9 +43,6 @@ public class Monitor implements Runnable
 
         final MySQLConfig mySQLConfig = FileUtils.toObject(databaseConfigFile, MySQLConfig.class);
         this.serverConfig = FileUtils.toObject(serverConfigFile, ServerConfig.class);
-        for (int i = 0; i < 10; i++) {
-            System.out.println(mySQLConfig.username + " " + mySQLConfig.address);
-        }
         this.mySQLDatabase = new MySQLDatabase(mySQLConfig);
 
         this.minecraftServerRepository = new MinecraftServerRepository(this.mySQLDatabase);

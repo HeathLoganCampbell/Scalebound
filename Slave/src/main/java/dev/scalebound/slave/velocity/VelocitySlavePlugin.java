@@ -24,6 +24,7 @@ public class VelocitySlavePlugin
         this.logger = logger;
 
         this.monitor = new Monitor(new VelocityDataCollector(this.server));
-        this.server.getScheduler().buildTask(this, () -> this.monitor.run()).repeat(5, TimeUnit.SECONDS);
+        this.server.getScheduler().buildTask(this, this.monitor).repeat(5, TimeUnit.SECONDS);
+        this.server.getScheduler().buildTask(this, new VelocityServerManager(this.server, this.monitor)).repeat(5, TimeUnit.SECONDS);
     }
 }
