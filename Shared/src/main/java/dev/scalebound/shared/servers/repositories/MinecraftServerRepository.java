@@ -81,6 +81,8 @@ public class MinecraftServerRepository extends RepositoryBase
         minecraftServer.setServerName(serverName);
         minecraftServer.setCreationTS(System.currentTimeMillis());
         minecraftServer.setProfileId(profile.getProfileId());
+        minecraftServer.setMaxPlayerCount(profile.getMaxPlayerCount());
+        minecraftServer.setMaxRamMB(profile.getMaxRamMB());
         return minecraftServer;
     }
 
