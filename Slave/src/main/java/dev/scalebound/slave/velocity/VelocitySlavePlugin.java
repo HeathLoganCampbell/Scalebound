@@ -1,6 +1,8 @@
 package dev.scalebound.slave.velocity;
 
 import com.google.inject.Inject;
+import com.velocitypowered.api.event.Subscribe;
+import com.velocitypowered.api.event.proxy.ProxyInitializeEvent;
 import com.velocitypowered.api.plugin.Plugin;
 import com.velocitypowered.api.proxy.ProxyServer;
 import dev.scalebound.slave.bukkit.BukkitDataCollector;
@@ -16,6 +18,7 @@ public class VelocitySlavePlugin
     private final ProxyServer server;
     private final Logger logger;
     private Monitor monitor;
+    private VelocityServerManager serverManager;
 
     @Inject
     public VelocitySlavePlugin(ProxyServer server, Logger logger)
@@ -24,7 +27,13 @@ public class VelocitySlavePlugin
         this.logger = logger;
 
         this.monitor = new Monitor(new VelocityDataCollector(this.server));
-        VelocityServerManager serverManager = new VelocityServerManager(this.server, this.monitor);
+        this.serverManager = new VelocityServerManager(this.server, this.monitor);
+
+    }
+
+    @Subscribe
+    public void onProxyInitialization(ProxyInitializeEvent event)
+    {
         this.server.getScheduler().buildTask(this, () -> this.monitor.run()).repeat(5, TimeUnit.SECONDS);
         this.server.getScheduler().buildTask(this, () -> serverManager.run()).repeat(5, TimeUnit.SECONDS);
     }
