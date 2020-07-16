@@ -54,8 +54,10 @@ public class VelocityServerManager implements Runnable
             this.profiledServers.clear();
             this.tickProfile = 0;
             List<ServerProfile> allProfiles = this.profileRepository.getAllProfiles();
-            for (ServerProfile profile : allProfiles)
+            for (ServerProfile profile : allProfiles) {
+                System.out.println(profile.getName() + " = #" + profile.getProfileId());
                 this.profileToId.put(profile.getName(), profile.getProfileId());
+            }
         }
 
         profiledServers.clear();
