@@ -42,8 +42,8 @@ public class VelocitySlavePlugin
     @Subscribe
     public void onProxyInitialization(ProxyInitializeEvent event)
     {
-        this.server.getScheduler().buildTask(this, () -> this.monitor.run()).repeat(5, TimeUnit.SECONDS);
-        this.server.getScheduler().buildTask(this, () -> this.serverManager.run()).repeat(5, TimeUnit.SECONDS);
+        this.server.getScheduler().buildTask(this, () -> this.monitor.run()).repeat(5, TimeUnit.SECONDS).schedule();
+        this.server.getScheduler().buildTask(this, () -> this.serverManager.run()).repeat(5, TimeUnit.SECONDS).schedule();
 
         this.server.getEventManager().register(this, new HubBalanceListener(this));
     }
