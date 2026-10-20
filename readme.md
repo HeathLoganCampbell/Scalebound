@@ -13,11 +13,11 @@ numerous mini servers.
 A server profile is pretty much how you want the server
 to look and feel with plugins, configs and worlds.
 
-You can then add ways to scale these servers in proposition 
+You can then add ways to scale these servers in proportion 
 to player count.
 
 ### Graphs and monitoring
-We have a few in build tooling to track 
+We have a few built-in tools to track 
 tps, avg ping, ram usage, cpu usage and player count
 
-### Powered by a MYSQL server
+### Powered by a MySQL server
